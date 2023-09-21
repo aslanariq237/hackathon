@@ -13,7 +13,7 @@ const FormParse = () => {
     }
 
     const resume = (e) =>{
-        
+        console.log("Masih Pengerjaan")
     }
     useEffect(() => {
         axios.post(urlStoreReq,
@@ -25,7 +25,7 @@ const FormParse = () => {
             })
         getResume();
         console.log('ssas');
-    }, [])
+    }, [resume])
     return (
         <div className=" mx-4 mt-20">
             <div className="flex justify-center">
