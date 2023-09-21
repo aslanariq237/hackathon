@@ -3,13 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-textract": "^3.409.0",
+    "@chatscope/chat-ui-kit-react": "github:chatscope/chat-ui-kit-react",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@heroicons/react": "^2.0.18",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.1.0",
+    "axios": "^1.5.0",
+    "buffer": "^6.0.3",
+    "crypto": "^1.0.1",
+    "http": "^0.0.1-security",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "openai": "^4.0.0",
+    "pdfjs-dist": "^3.10.111",
+    "querystring": "^0.2.1",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.46.1",
+    "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-sweetalert2": "^0.6.0",
+    "resume-parser": "^1.1.0",
+    "sort-by": "^1.2.0",
+    "stream": "^0.0.2",
+    "textract": "^2.5.0",
+    "web-vitals": "^2.1.4",
+    "xpdf": "^0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +61,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "pdf-to-text": "^0.0.7",
+    "tailwindcss": "^3.3.3"
   }
 }
