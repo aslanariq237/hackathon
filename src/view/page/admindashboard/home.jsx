@@ -37,29 +37,6 @@ export default function Index() {
         }).catch(err => console.log)
     }
 
-    // const DelEvent = async (e, rowSelect) => {
-    //     await axios.post(urlDelEvent, {
-    //         id: rowSelect.id
-    //     }).then(function () {
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: 'Sukses Delete Event',
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         })
-    //             .then(
-    //                 getEvent()
-    //             )
-    //     })
-    //         .catch((message) => {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: message.response.data.message,
-    //                 showConfirmButton: false,
-    //                 timer: 160000
-    //             })
-    //         })
-    // }
 
     const columns = [
         {

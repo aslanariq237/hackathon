@@ -13,7 +13,7 @@ const FormParse = () => {
     }
 
     const resume = (e) =>{
-        [e.target.name] : e.target.value
+        
     }
     useEffect(() => {
         axios.post(urlStoreReq,
