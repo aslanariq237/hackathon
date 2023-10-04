@@ -1,11 +1,11 @@
 import React from "react";
 import Carousel from './carousel'
 
-function Index(){
-    return(
+function Index() {
+    return (
         <div className="box">
             <div className="carousel my-4">
-                <Carousel/>
+                <Carousel />
             </div>
         </div>
     )

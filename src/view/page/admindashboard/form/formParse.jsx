@@ -1,59 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { urlGetReq, urlStoreReq } from "../../../../url";
+import {urlGetReq, urlStoreReq } from "../../../../url";
 import axios from "axios";
 
-const FormParse = () => {
-    const [data, setData] = useState();
-    const [skill, setSkill] = useState();
-    const [graduate, setGraduate] = useState();
-    const [experience, setExperience] = useState();
-    const [require, setRequire] = useState();
 
-    const getResume = async() => {
-        await axios.get(urlGetReq).then(function(response){
-            setData(response.data)
+const Resume = () => {
+    const [Data, setData] = useState()
+    const getData = async() => {
+        await axios.get(urlGetReq).then(res=>{
+            setData(res.data)
+        }).catch(err=>{
+            console.log(err)
         })
     }
-
-    const handleSubmit = async (e) =>{
+    const resume = async (e) => {
         e.preventDefault();
+        const elements = e.target.elements
+
         await axios.post(urlStoreReq, {
-            skill : skill,
-            graduate : graduate,
-            experience : experience,
+            skill : elements.skill.value,
+            graduate : elements.graduate.value,
+            experience : elements.experience.value
         }).then(res => {
-            console.log(res.data)
+            console.log(res)
+            res.json()
+            console.log(res.json())
         }).catch(err => {
-            console.log(err);
+            console.log(err)
         })
     }
     useEffect(() => {
-        getResume();
-        console.log('ss');
+        getData();
     },[])
-    // useEffect(() => {
-    //     axios.post(urlStoreReq,
-    //         JSON.stringify(resume)
-    //         ).then(res => {
-    //             console.log(res.data)
-    //         }).catch(err => {
-    //             console.log(err.data)
-    //         })
-    //     getResume();
-    //     console.log('ssas');
-    // }, [])
+
     return (
         <div className=" mx-4 mt-20">
             <div className="flex justify-center">
-                <div className="container">
-                    <div className="card shadow-md px-5 py-5 border-t-4">
+                <div className="container w-[1000px]">
+                    <div className="card shadow-md px-5 py-5 border-t-4 ">
                         <div className="card-body">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque soluta assumenda debitis odio unde labore vel blanditiis, officiis rerum architecto eum corrupti nostrum. Facilis incidunt, officia quo repellendus quidem optio?</p>
-                            <form onSubmit={handleSubmit}>
-                                <input type="text" name="skill" className="border shadow-lg" id="" />
-                                <input type="text" name="graduate" className="border shadow-lg" id="" />
-                                <input type="text" name="experience" className="border shadow-lg" id="" />
-                                {/* <div className="skill mt-2">
+                            <form onSubmit={resume}>
+                                <div className="skill mt-2">
                                     <p>SKILL*</p>
                                     <input type="text" className="border px-2 rounded-md w-full" name="skill"/>
                                 </div>
@@ -63,25 +50,29 @@ const FormParse = () => {
                                 </div>
                                 <div className="experience mt-2">
                                     <p>EXPERIENCE</p>
-                                    <input type="text" className="border px-2 rounded-md w-full" name="experience" />
-                                </div> */}
-                                <input type="submit" value="Submit" className="border shadow-md rounded-md px-2 w-28 mt-3" />
+                                    <input type="text" className="border px-2 rounded-md w-full" name="experience"/>
+                                </div>
+                                <button type="submit" className="border shadow-md rounded-md px-2 w-28 mt-3">Submit</button>
                             </form>
                         </div>
                     </div>
-                    <div className="card mt-4 shadow-md border-t-4">
+                    {/* <div className="card mt-4 shadow-md border-t-4">
                         <div className="card-body">
-                            {data?.map((li, i) => (
+                            {Data?.map((li, i) => (
                                 <div className="" key={i}>
-                                    <p>{li.skill}</p>
+                                    <ul className="fle">
+                                        <li>{li.skill}</li>
+                                        <li>{li.graduate}</li>
+                                        <li>{li.experience}</li>
+                                    </ul>
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
     )
 }
 
-export default FormParse
+export default Resume

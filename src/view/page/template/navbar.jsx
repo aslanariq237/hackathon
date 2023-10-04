@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="nav mx-5">
         <div className="flex justify-between mx-5 mt-2 items-center">
           <div className="flex space-x-14">
-              <h3 className="font-semibold">Binus @Bekasi Event</h3>
+              <h3 className="font-semibold">ResumeParser</h3>
             {/* <ul className="flex space-x-14 items-center">
               <Link to={'/home'}>
                 <li className=""><a href="/" className=""><h1 className="text-xl font-semibold">M3</h1></a></li>

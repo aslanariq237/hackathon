@@ -2,67 +2,80 @@ import React from 'react';
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { urlResume } from '../../../url';
+import { urlGetReq, urlResume } from '../../../url';
 import Swal from 'sweetalert2';
 // import pdfUtil from "pdf-to-text"
 
 
 export default function Index() {
-    const [getResume, setGetResume] = React.useState([])
+    const [resume, setResume] = React.useState([])
+    const [req, setReq] = React.useState([])
     const [rowSelect, setRowSelect] = React.useState([])
-
-
-    // const ResumePDF = () => {
-    //     var pdf_path = "../../pdf/CO FADLIN SAHABU.pdf";
-
-    //     //option to extract text from page 0 to 10
-    //     var option = { from: 0, to: 10 };
-
-    //     pdfUtil.pdfToText(pdf_path, option, function (err, data) {
-    //         if (err) throw (err);
-    //         console.log(data); //print text    
-    //     });
-
-    //     //Omit option to extract all text from the pdf file
-    //     pdfUtil.pdfToText(pdf_path, function (err, data) {
-    //         if (err) throw (err);
-    //         console.log(data); //print all text    
-    //     });
-    // }
-
 
     const GetResume = async () => {
         await axios.get(urlResume).then(res => {
-            setGetResume(res.data)
-        }).catch(err => console.log)
+            console.log(res)
+            setResume(res.data)
+        }).catch(err => console.log(err))
+    }
+    const GetReq = async() => {
+        await axios.get(urlGetReq).then(res => {
+            setReq(res.data)
+        }).catch(err => console.log(err))
     }
 
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const elements = e.target.elements;
+    //     const requestData = {
+    //         text_1 : "I want Graduate S1",
+    //         text_2 : elements.text2.value,
+    //     };  
+    //     const requestJson = JSON.stringify(requestData);
+    //     try {
+    //         const response = await fetch("https://api.api-ninjas.com/v1/textsimilarity", {
+    //             headers : {'X-Api-Key': '+4vtOoE3EzsQTjh1RR/yZw==P4AYiHr2gUZn5euh'},
+    //             method: "POST",
+    //             body: requestJson,
+    //         });
+    //         const responseText = await response.text();
+    //         console.log(responseText);
+    //     } catch (ex) {
+    //         console.error("POST error!");
+    //     }
+    // };
 
     const columns = [
         {
             name: 'Nama',
             selector: row => row['nama'],
-            sortable: true
+            sortable: true,
+            maxWidth : "150px"
         },
         {
             name: 'Skill',
             selector: row => row['skill'],
-            sortable: true
+            sortable: true,
+            maxWidth : "350px",
         },
         {
             name: 'Graduate',
             selector: row => row['graduate'],
-            sortable: true
+            sortable: true,
+            maxWidth: "500px",
         },
         {
             name: 'Experience',
             selector: row => row['experience'],
-            sortable: true
+            sortable: true,
+            maxWidth : "250px"
         },
         {
             name: 'Status',
             selector: row => row.status === 0 ? 'Rejected' : 'Accepted',
-            sortable: true
+            sortable: true,
+            maxWidth: "150px"
 
         },
         {
@@ -76,62 +89,24 @@ export default function Index() {
                         <TrashIcon className="w-4 h-4" />
                     </button>
                 </div>),
-            sortable: true
+            sortable: true,
+            maxWidth : "150px"
 
         }
     ]
     React.useEffect(() => {
         GetResume();
+        GetReq();
         console.log('ssas')
     }, [rowSelect])
 
-    const contentStyle = { width: '700px', position: 'absolute', left: '500px', };
+    // const contentStyle = { width: '500px', position: 'absolute', left: '500px', };
     return (
         <React.Fragment>
             <div className="px-10">
                 <div className="head">
                     <div className="title flex justify-between items-baseline py-10">
                         <p>Hello, Admin</p>
-                        {/* <Popup trigger={<button className="text-md bg-slate-200 py-1 px-1 rounded-md">Create New Event</button>} position="left top"
-                            {...{contentStyle}}
-                        >
-                            <div className="container bg-gray-200">
-                                <div className="card">
-                                    <div className="card-header border px-2 py-2">
-                                        <p className="text-lg font-semibold">Create Event</p>
-                                    </div>
-                                    <div className="card-body border shadow-md px-4 py-4">
-                                        <div className="Title">
-                                            <p className="title text-md ml-2">Event Title</p>
-                                            <input className="border px-2 w-full rounded-md" type="text" name="" placeholder="Input Title Event" id="" />
-                                        </div>
-                                        <div className="flex date-time space-x-5">
-                                            <div className="time">
-                                                <p className="title text-md ml-2">Time</p>
-                                                <input type="time" className="border px-2 w-full rounded-md" name="" id="" />
-                                            </div>
-                                            <div className="date">
-                                                <p className="title text-md ml-2">Date</p>
-                                                <input className="border px-2 w-full rounded-md" type="date" name="" placeholder="Input Title Event" id="" />
-                                            </div>
-                                        </div>
-                                        <div className="Location">
-                                            <p className="title text-md ml-2">Location</p>
-                                            <input className="border px-2 w-full rounded-md" type="text" name="" placeholder="Input Location" id="" />
-                                        </div>
-                                        <div className="poster">
-                                            <p className="title text-md ml-2">Poster</p>
-                                            <div className="card">
-                                                <div className="card-body border rounded-md bg-white">
-                                                    <input type="file" name="" id="" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="submit flex justify-center w-full shadow-lg mt-4 bg-white rounded-md text-lg">Submit</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Popup> */}
                     </div>
                 </div>
                 <div className="table w-full">
@@ -151,7 +126,7 @@ export default function Index() {
                             <div>
                                 <DataTable
                                     columns={columns}
-                                    data={getResume}
+                                    data={resume}
                                     keyField=''
                                     pagination
                                     persistTableHead
